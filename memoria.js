@@ -20,7 +20,7 @@ $(document).ready(function(){
 
 var strCuadros=[1,2,3], iIteraciones=4;
 var strCuadros2=[1,2,3,4], iIteraciones=4;
-
+var strCuadros3=[1,2,3,4,5,6], iIteraciones=4;
 //evento al hacer clic en la lista
 
 $('ul li').live('click',function(){
@@ -255,7 +255,55 @@ $.fntTiempo();
 });
 
 };
+/////////////////dificil///////////////
 
+//funcion para iniciar el juego
+
+$.fntDificil=function(){
+
+//mostramos el estado del juego
+
+$('#divContador').find('p').html('Cargando...');
+
+//creamos la cuadricula
+
+for(var iCont=0;iCont<iIteraciones;iCont++){
+
+//desordenamos el array
+
+strCuadros3=strCuadros3.sort(function(){
+
+return Math.random() - 0.5
+
+});
+
+//agregamos los items a la lista (inicialmente vacios)
+
+for(var iCuadros=0;iCuadros<strCuadros3.length;iCuadros++){
+
+$('#divContenedor ul').append('<li rel="'+strCuadros3[iCuadros]+'">&nbsp;</li>');
+
+}
+
+}
+
+//reseteamos todas las variables globales
+
+iTiempo=iPuntos=0, objPrimero=undefined;
+
+//ocultamos la capa inicial
+
+$('#divInicio').stop(true,true).fadeOut(1500,function(){
+
+//iniciamos el conteo de tiempo
+
+blnJuegoF=false;
+
+$.fntTiempo();
+
+});
+
+};
 //////////////////////////////////////
 
 //clic en el boton jugar facil
@@ -276,8 +324,14 @@ $('#btnJugar2').on('click',function(){
 $.fntMedio();
 
 });
+//clic en el boton jugar dificil
 
+$('#btnJugar3').on('click',function(){
 
+//iniciamos el juego
 
+$.fntDificil();
+
+});
 
 });
